@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/counter_screen.dart';
 import 'screens/lifecycle_screen.dart';
+import 'screens/todo_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,7 +17,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Ana menü ekranı
 class HomeMenu extends StatelessWidget {
   const HomeMenu({super.key});
 
@@ -30,7 +30,6 @@ class HomeMenu extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Counter ekranına git
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -42,10 +41,7 @@ class HomeMenu extends StatelessWidget {
               },
               child: const Text('Part 2 — Counter'),
             ),
-
             const SizedBox(height: 16),
-
-            // Lifecycle ekranına git
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -56,6 +52,18 @@ class HomeMenu extends StatelessWidget {
                 );
               },
               child: const Text('Part 3 — Lifecycle'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TodoScreen(),
+                  ),
+                );
+              },
+              child: const Text('Part 5 — ToDo List'),
             ),
           ],
         ),
