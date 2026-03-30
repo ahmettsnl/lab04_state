@@ -14,7 +14,14 @@ class _CounterScreenState extends State<CounterScreen> {
   void increment() {
     setState(() {
       _count++;
-      _message = 'Going up! 🚀';
+
+      if (_count == 10) {
+        _message = 'Target met';
+      } else if (_count == 5) {
+        _message = 'Close to reach your target';
+      } else {
+        _message = 'Going up! 🚀';
+      }
     });
   }
 
@@ -39,7 +46,7 @@ class _CounterScreenState extends State<CounterScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Counter'),
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Colors.green,
       ),
       body: Center(
         child: Column(
@@ -47,10 +54,7 @@ class _CounterScreenState extends State<CounterScreen> {
           children: [
             Text(
               _message,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.grey,
-              ),
+              style: const TextStyle(fontSize: 18, color: Colors.grey),
             ),
             const SizedBox(height: 24),
             Text(

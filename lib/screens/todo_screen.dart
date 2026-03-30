@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'new_page.dart';
 
 class TodoItem {
   String text;
@@ -39,20 +40,33 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
-  int get remaining =>
-      todos.where((todo) => !todo.isDone).length;
+  int get remaining => todos.where((todo) => !todo.isDone).length;
+
+  int get doneCount => todos.where((todo) => todo.isDone).length;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('To-Do (${remaining} remaining)'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const NewPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // input
             Row(
               children: [
                 Expanded(
@@ -71,10 +85,7 @@ class _TodoScreenState extends State<TodoScreen> {
                 ),
               ],
             ),
-
             const SizedBox(height: 20),
-
-            // liste
             Expanded(
               child: todos.isEmpty
                   ? const Center(child: Text('No tasks yet'))
@@ -102,6 +113,23 @@ class _TodoScreenState extends State<TodoScreen> {
                         );
                       },
                     ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.only(top: 12),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                '$doneCount out of ${todos.length} done',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

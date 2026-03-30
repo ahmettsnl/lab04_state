@@ -12,6 +12,7 @@ class _LifecycleScreenState extends State<LifecycleScreen> {
   late Timer _timer;
   int _seconds = 0;
   int _rebuilds = 0;
+  String _message = '';
 
   @override
   void initState() {
@@ -21,7 +22,14 @@ class _LifecycleScreenState extends State<LifecycleScreen> {
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
         _seconds++;
+
+        if (_seconds == 120) {
+          _message = 'Time to eat';
+        } else if (_seconds == 60) {
+          _message = 'Time to drink water';
+        }
       });
+
       print('⏱ tick... seconds: $_seconds');
     });
   }
@@ -48,6 +56,14 @@ class _LifecycleScreenState extends State<LifecycleScreen> {
               style: const TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              _message,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.blue,
               ),
             ),
             const SizedBox(height: 20),
